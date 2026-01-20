@@ -13,7 +13,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick, variant = '
   
   return (
     <div 
-      className={`bg-white rounded-[20px] overflow-hidden shadow-sm active:scale-[0.98] transition-all duration-300 border border-slate-100 group flex flex-col h-full ${isLarge ? 'col-span-2' : ''}`}
+      className={`bg-white rounded-xl overflow-hidden shadow-sm active:scale-[0.98] transition-all duration-300 border border-slate-100 group flex flex-col h-full ${isLarge ? 'col-span-2' : ''}`}
       onClick={() => onClick(product)}
     >
       <div className={`relative ${isLarge ? 'aspect-[18/9]' : 'aspect-[1/1]'} overflow-hidden bg-slate-100`}>

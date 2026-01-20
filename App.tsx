@@ -108,9 +108,9 @@ const App: React.FC = () => {
         </form>
       </header>
 
-      {/* 活动 Banner */}
+      {/* 活动 Banner - 优化圆角为 2xl */}
       <div className="px-4 pt-4 mb-6">
-        <div className="relative h-44 rounded-[32px] overflow-hidden group shadow-sm active:scale-[0.99] transition-transform">
+        <div className="relative h-44 rounded-2xl overflow-hidden group shadow-sm active:scale-[0.99] transition-transform">
           <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-tr from-black/70 via-black/10 to-transparent p-6 flex flex-col justify-end items-start">
             <div className="bg-[#FFDD00] text-black text-[10px] font-black px-2 py-0.5 mb-2 rounded-[2px] uppercase">Flash Sale</div>
@@ -214,7 +214,7 @@ const App: React.FC = () => {
                    <div className="grid grid-cols-3 gap-4">
                       {MOCK_BRANDS.filter(b => b.type === type).map(brand => (
                         <button key={brand.name} onClick={() => { setSelectedBrand(brand); setShowAllBrands(false); }} className="flex flex-col items-center gap-2 active:scale-95 transition-transform">
-                           <div className="w-full aspect-square bg-slate-50 rounded-2xl flex items-center justify-center p-3 border border-slate-100 shadow-sm">
+                           <div className="w-full aspect-square bg-slate-50 rounded-xl flex items-center justify-center p-3 border border-slate-100 shadow-sm">
                               <span className="text-[10px] font-black text-center text-slate-800 leading-tight uppercase">{brand.name}</span>
                            </div>
                            <span className="text-[8px] font-black text-slate-300 tracking-[1px] uppercase">Official</span>
@@ -251,7 +251,7 @@ const App: React.FC = () => {
                 <h2 className="text-4xl font-black text-white italic tracking-tighter drop-shadow-xl uppercase">{selectedBrand.name}</h2>
              </div>
           </div>
-          <div className="flex-1 -mt-4 bg-white rounded-t-3xl p-8 overflow-y-auto no-scrollbar shadow-inner">
+          <div className="flex-1 -mt-4 bg-white rounded-t-2xl p-8 overflow-y-auto no-scrollbar shadow-inner">
              <div className="bg-[#FFDD00] p-6 mb-8 rounded-[4px] relative border-l-8 border-black shadow-lg">
                 <div className="absolute -top-3 left-4 bg-black text-white px-2 py-0.5 text-[8px] font-black tracking-widest uppercase italic">The Story</div>
                 <p className="text-[13px] text-black font-black leading-relaxed italic uppercase">“{selectedBrand.description}”</p>
@@ -269,7 +269,7 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* 商品详情弹窗 */}
+      {/* 商品详情弹窗 - 优化圆角为 2xl */}
       {selectedProduct && (
         <div className="fixed inset-0 z-[70] bg-white flex flex-col animate-in fade-in slide-in-from-bottom duration-300">
           <div className="relative h-[45vh]">
@@ -291,7 +291,8 @@ const App: React.FC = () => {
                   <div className="text-[10px] text-slate-300 line-through font-black italic">¥{selectedProduct.originalPrice}</div>
                </div>
             </div>
-            <div className="bg-slate-50 p-5 rounded-2xl mb-8 border border-slate-100 relative overflow-hidden group">
+            {/* AI 洞察框优化为 rounded-xl */}
+            <div className="bg-slate-50 p-5 rounded-xl mb-8 border border-slate-100 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-20 h-20 bg-[#FFDD00]/10 rounded-full -mr-10 -mt-10 group-hover:scale-110 transition-transform"></div>
               <div className="flex items-center gap-2 mb-3 relative z-10">
                  <div className="w-2 h-2 bg-[#FFDD00] rounded-full animate-pulse"></div>
@@ -329,4 +330,11 @@ const App: React.FC = () => {
         </button>
         <button className="text-slate-400 flex flex-col items-center gap-0.5 min-w-[48px] active:scale-90 transition-transform">
           <i className="far fa-user text-base"></i>
-          <span className="text-[8px] font-black uppercase tracking
+          <span className="text-[8px] font-black uppercase tracking-tighter">我的</span>
+        </button>
+      </nav>
+    </div>
+  );
+};
+
+export default App;
