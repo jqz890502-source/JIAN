@@ -108,19 +108,19 @@ const App: React.FC = () => {
         </form>
       </header>
 
-      {/* 首页活动 Banner */}
+      {/* 活动 Banner */}
       <div className="px-4 pt-4 mb-6">
-        <div className="relative h-44 rounded-[32px] overflow-hidden group shadow-sm">
+        <div className="relative h-44 rounded-[32px] overflow-hidden group shadow-sm active:scale-[0.99] transition-transform">
           <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-tr from-black/70 via-black/10 to-transparent p-6 flex flex-col justify-end items-start">
             <div className="bg-[#FFDD00] text-black text-[10px] font-black px-2 py-0.5 mb-2 rounded-[2px] uppercase">Flash Sale</div>
             <h3 className="text-white text-2xl font-black mb-1 italic leading-tight">春夏巡礼 · 1折起</h3>
-            <p className="text-white/70 text-[10px] font-medium tracking-widest uppercase">Member Exclusive Deals</p>
+            <p className="text-white/70 text-[10px] font-medium tracking-widest uppercase italic">Member Exclusive Deals</p>
           </div>
         </div>
       </div>
 
-      {/* 推荐品牌区 - 仅作为跳转入口 */}
+      {/* 推荐品牌横滑区 */}
       <div className="bg-white py-2 mb-6">
         <div className="px-5 mb-5 flex justify-between items-end">
           <div className="flex flex-col">
@@ -134,9 +134,9 @@ const App: React.FC = () => {
         </div>
         <div className="flex gap-5 overflow-x-auto no-scrollbar px-5 py-2">
           {MOCK_BRANDS.map((brand) => (
-            <button key={brand.name} onClick={() => setSelectedBrand(brand)} className="flex flex-col items-center gap-2.5 min-w-[70px]">
+            <button key={brand.name} onClick={() => setSelectedBrand(brand)} className="flex flex-col items-center gap-2.5 min-w-[70px] active:scale-95 transition-transform">
               <div className="relative group">
-                <div className="w-16 h-16 rounded-full border-2 border-slate-100 bg-white flex items-center justify-center p-3 shadow-sm active:scale-90 transition-transform">
+                <div className="w-16 h-16 rounded-full border-2 border-slate-100 bg-white flex items-center justify-center p-3 shadow-sm transition-transform">
                    <span className="text-[10px] font-black text-slate-800 text-center leading-tight uppercase">{brand.name}</span>
                 </div>
                 {collectedBrands.has(brand.name) && (
@@ -151,7 +151,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* 模块分类切换 - 热门/最新/销量 */}
+      {/* 热门/最新/销量 切换 */}
       <div className="px-4 mb-4 sticky top-[138px] z-30 py-1">
         <div className="flex bg-slate-100/90 backdrop-blur-md p-1 rounded-full border border-white shadow-sm">
           {(['热门商品', '最新上架', '销量排行'] as TabType[]).map(tab => (
@@ -168,7 +168,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* 核心改动：品类选择 - 完全横排滚动显示 */}
+      {/* 品类选择 - 横排滚动 */}
       <div className="mb-6">
         <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 flex-nowrap py-1">
           {categories.map(cat => (
@@ -178,7 +178,7 @@ const App: React.FC = () => {
               className={`px-6 py-2 rounded-full text-[10px] font-black transition-all border whitespace-nowrap shrink-0 uppercase tracking-wider ${
                 activeCategory === cat 
                   ? 'bg-[#FFDD00] text-black border-[#FFDD00] shadow-sm scale-105' 
-                  : 'bg-white text-slate-400 border-slate-200 hover:border-slate-400'
+                  : 'bg-white text-slate-400 border-slate-200 active:border-slate-400'
               }`}
             >
               {cat}
@@ -188,14 +188,14 @@ const App: React.FC = () => {
       </div>
 
       <main className="px-4">
-        <div className="grid grid-cols-2 gap-3.5 pb-10">
+        <div className="grid grid-cols-2 gap-3.5 pb-12">
           {filteredProducts.map((product, idx) => (
             <ProductCard key={product.id} product={product} variant={idx % 9 === 0 ? 'large' : 'standard'} onClick={handleProductClick} />
           ))}
         </div>
       </main>
 
-      {/* 页面: 全部品牌 */}
+      {/* 全部品牌页面 */}
       {showAllBrands && (
         <div className="fixed inset-0 z-[100] bg-white flex flex-col animate-in fade-in slide-in-from-right duration-300">
            <div className="p-5 flex justify-between items-center border-b border-slate-100">
@@ -227,7 +227,7 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* 品牌详情全屏页面 */}
+      {/* 品牌详情页 */}
       {selectedBrand && (
         <div className="fixed inset-0 z-[60] bg-white flex flex-col animate-in fade-in slide-in-from-bottom duration-500">
           <div className="relative h-[30vh]">
@@ -251,21 +251,16 @@ const App: React.FC = () => {
                 <h2 className="text-4xl font-black text-white italic tracking-tighter drop-shadow-xl uppercase">{selectedBrand.name}</h2>
              </div>
           </div>
-
           <div className="flex-1 -mt-4 bg-white rounded-t-3xl p-8 overflow-y-auto no-scrollbar shadow-inner">
              <div className="bg-[#FFDD00] p-6 mb-8 rounded-[4px] relative border-l-8 border-black shadow-lg">
                 <div className="absolute -top-3 left-4 bg-black text-white px-2 py-0.5 text-[8px] font-black tracking-widest uppercase italic">The Story</div>
-                <p className="text-[13px] text-black font-black leading-relaxed italic uppercase">
-                  “{selectedBrand.description}”
-                </p>
+                <p className="text-[13px] text-black font-black leading-relaxed italic uppercase">“{selectedBrand.description}”</p>
              </div>
-
              <div className="flex items-center justify-between mb-5 border-b-2 border-[#FFDD00] pb-2">
                 <h4 className="text-xs font-black text-slate-900 tracking-[4px] uppercase italic">Collections</h4>
                 <span className="text-[10px] font-black text-slate-400">({MOCK_PRODUCTS.filter(p => p.brand === selectedBrand.name).length})</span>
              </div>
-
-             <div className="grid grid-cols-2 gap-4 pb-10">
+             <div className="grid grid-cols-2 gap-4 pb-12">
                 {MOCK_PRODUCTS.filter(p => p.brand === selectedBrand.name).map(product => (
                   <ProductCard key={product.id} product={product} variant="standard" onClick={handleProductClick} />
                 ))}
@@ -296,7 +291,6 @@ const App: React.FC = () => {
                   <div className="text-[10px] text-slate-300 line-through font-black italic">¥{selectedProduct.originalPrice}</div>
                </div>
             </div>
-
             <div className="bg-slate-50 p-5 rounded-2xl mb-8 border border-slate-100 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-20 h-20 bg-[#FFDD00]/10 rounded-full -mr-10 -mt-10 group-hover:scale-110 transition-transform"></div>
               <div className="flex items-center gap-2 mb-3 relative z-10">
@@ -305,10 +299,8 @@ const App: React.FC = () => {
               </div>
               <p className="text-[13px] font-black text-slate-700 leading-relaxed italic relative z-10">“{productInsight || "正在通过 AI 分析该单品潮流指数..."}”</p>
             </div>
-
             <p className="text-[11px] text-slate-500 font-bold leading-loose mb-10 uppercase tracking-tight">{selectedProduct.description}</p>
-            
-            <div className="sticky bottom-0 bg-white/95 backdrop-blur-sm pb-8 flex gap-3">
+            <div className="sticky bottom-0 bg-white/95 backdrop-blur-sm pb-10 flex gap-3">
                <button className="flex-1 h-12 bg-white border-2 border-black text-black font-black text-[11px] rounded-full active:scale-95 transition-all uppercase tracking-tighter">加入购物袋</button>
                <button className="flex-1 h-12 bg-black text-[#FFDD00] font-black text-[11px] rounded-full active:scale-95 transition-all shadow-2xl uppercase tracking-tighter">立即结算</button>
             </div>
@@ -316,13 +308,13 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* 底部导航 - 重排顺序并微调高度 */}
+      {/* 底部导航栏 */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md px-6 py-2 flex justify-between items-center z-40 border-t border-slate-50 shadow-[0_-2px_15px_rgba(0,0,0,0.03)]">
-        <button className="text-slate-900 flex flex-col items-center gap-0.5 min-w-[48px]">
+        <button className="text-slate-900 flex flex-col items-center gap-0.5 min-w-[48px] active:scale-90 transition-transform">
           <i className="fas fa-home text-base"></i>
           <span className="text-[8px] font-black uppercase tracking-tighter">精选</span>
         </button>
-        <button className="text-slate-400 flex flex-col items-center gap-0.5 min-w-[48px] hover:text-black">
+        <button className="text-slate-400 flex flex-col items-center gap-0.5 min-w-[48px] active:scale-90 transition-transform">
           <i className="far fa-heart text-base"></i>
           <span className="text-[8px] font-black uppercase tracking-tighter">收藏</span>
         </button>
@@ -331,17 +323,10 @@ const App: React.FC = () => {
             <i className="fas fa-shopping-bag text-lg"></i>
           </button>
         </div>
-        <button className="text-slate-400 flex flex-col items-center gap-0.5 min-w-[48px] hover:text-black">
+        <button className="text-slate-400 flex flex-col items-center gap-0.5 min-w-[48px] active:scale-90 transition-transform">
           <i className="fas fa-th-large text-base"></i>
           <span className="text-[8px] font-black uppercase tracking-tighter">分类</span>
         </button>
-        <button className="text-slate-400 flex flex-col items-center gap-0.5 min-w-[48px] hover:text-black">
+        <button className="text-slate-400 flex flex-col items-center gap-0.5 min-w-[48px] active:scale-90 transition-transform">
           <i className="far fa-user text-base"></i>
-          <span className="text-[8px] font-black uppercase tracking-tighter">我的</span>
-        </button>
-      </nav>
-    </div>
-  );
-};
-
-export default App;
+          <span className="text-[8px] font-black uppercase tracking
