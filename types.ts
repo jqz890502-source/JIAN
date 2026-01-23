@@ -42,9 +42,9 @@ export interface GroupActivity {
   leaderName?: string;
   targetAmount: number;
   currentAmount: number;
-  currentWeight: number; // 当前总重量
+  currentWeight: number; 
   participantCount: number;
-  participants: Participant[]; // 详细成员列表
+  participants: Participant[]; 
   endTime: string;
   strategy: 'CANCEL_IF_FAIL' | 'STILL_FORM_GROUP';
   isCertified?: boolean;
@@ -53,4 +53,11 @@ export interface GroupActivity {
 export interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+}
+
+export interface QuizQuestion {
+  id: number;
+  question: string;
+  options: string[];
+  answer: number;
 }
