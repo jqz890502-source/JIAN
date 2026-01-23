@@ -1,7 +1,5 @@
 {
-  "name": "OUTLETS Brand Station",
-  "description": "Premium brand outlet shopping experience powered by Gemini AI, featuring high-end design and curated discounts.",
-  "requestFramePermissions": [
-    "camera"
-  ]
+  "name": "Rakutao - Professional Japanese Goods Shopping Platform",
+  "description": "A modern, aesthetic redesign of the Rakutao homepage, focusing on Japanese ACG, celebrity merchandise, and used goods shopping with a clean user experience.",
+  "requestFramePermissions": []
 }
